@@ -1,17 +1,18 @@
+import os
+
 from snakemake.shell import shell
 
-if len(snakemake.params.keys()) != 1 or not 'script' in snakemake.params.keys():
-    raise Exception('Every rule using this wrapper needs'
-            'to define script as one and the only keyword param.')
+if globals().get("snakemake") is None:
+    snakemake = None  # prevent linter problems
+    raise Exception("This script was run without snakemake")
 
-# script is the only keyword param, hence it will always be last
-script = snakemake.params.pop(-1)
+if len(snakemake.params.keys()) > 0:
+    raise Exception("Keyword arguments are not allowed with this wrapper")
 
-# # Would ideally do this but snakemake can't handle nested definitions in parameters
-# # ie) can't define datamodule.batch_size = 128
-# for key, value in snakemake.params.items(): 
-#     if key != 'script': # Can't delete this from the dict for some reason
-#         command += f'{key}={value} '
+script = snakemake.params.pop(0)
+if not os.path.exists(script):
+    raise Exception("The first parameter is not a valid path to a script file")
+
 params_context = snakemake.__dict__.copy()
 args = []
 for option in snakemake.params:
