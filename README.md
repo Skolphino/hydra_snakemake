@@ -1,6 +1,6 @@
 # Hydra and Snakemake
 [![hydra](https://img.shields.io/badge/-Hydra_1.3-89b8cd&logoColor=white)](https://hydra.cc/)
-[![snakemake](https://img.shields.io/badge/-Snakemake_7.32.4-039475)](https://snakemake.readthedocs.io/)
+[![snakemake](https://img.shields.io/badge/-Snakemake_8.3.2-039475)](https://snakemake.readthedocs.io/)
 
 Very often we build our ML jobs such that they are configured by Hydra, and this is nice for quick development of projects. But this becomes a problem when you want to integrate this into a workflow management system like Snakemake.
 
