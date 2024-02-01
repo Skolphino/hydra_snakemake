@@ -23,6 +23,7 @@ args = " ".join(args)
 
 
 if snakemake.log:
-    shell(f"python {script} {args} > {snakemake.log} 2>&1")
+    log_arg = "hydra.job_logging.handlers.file.filename={snakemake.log}"
+    shell(f"python {script} {args} {log_arg}")
 else:
     shell(f"python {script} {args}")
