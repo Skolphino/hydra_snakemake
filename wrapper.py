@@ -21,4 +21,8 @@ for option in snakemake.params:
     args.append(params_context["arg"])
 args = " ".join(args)
 
-shell(f"python {script} {args}")
+
+if snakemake.log:
+    shell(f"python {script} {args} > {snakemake.log} 2>&1")
+else:
+    shell(f"python {script} {args}")
