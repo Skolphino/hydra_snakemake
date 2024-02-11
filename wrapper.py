@@ -23,7 +23,9 @@ args = " ".join(args)
 
 
 if snakemake.log:
-    log_arg = "hydra.job_logging.handlers.file.filename={snakemake.log}"
-    shell(f"python {script} {args} {log_arg}")
+    log_arg = f"hydra.job_logging.handlers.file.filename={snakemake.log}"
+    # args might contain flags at the end that don't like
+    # options like log_arg after them
+    shell(f"python {script} {log_arg} {args}")
 else:
     shell(f"python {script} {args}")
