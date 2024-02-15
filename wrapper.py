@@ -16,6 +16,9 @@ if not os.path.exists(script):
 params_context = snakemake.__dict__.copy()
 args = []
 for option in snakemake.params:
+    if type(option) is not str:
+        raise Exception(f"option {option} is not a string")
+
     option = option.replace("{hs:", "{")
     exec(f"arg = f'{option}'", {}, params_context)
     args.append(params_context["arg"])
