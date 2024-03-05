@@ -26,6 +26,12 @@ args = " ".join(args)
 
 
 if snakemake.log:
-    shell(f"python {script} {args} 2>&1 | tee {snakemake.log}")
+    cmd = f"python {script} {args} 2>&1 | tee {snakemake.log}"
 else:
-    shell(f"python {script} {args}")
+    cmd = f"python {script} {args}"
+
+try:
+    shell(cmd)
+except Exception as e:
+    print(f"Error while running `{cmd}'")
+    raise e
