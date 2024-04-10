@@ -26,7 +26,7 @@ args = " ".join(args)
 
 
 if snakemake.log:
-    cmd = f"python {script} {args} 2>&1 | tee {snakemake.log}"
+    cmd = f"python {script} {args} >{snakemake.log} 2>&1"
 else:
     cmd = f"python {script} {args}"
 
