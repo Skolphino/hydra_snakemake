@@ -31,6 +31,7 @@ else:
     cmd = f"python {script} {args}"
 
 try:
+    print(cmd)
     shell(cmd)
 except Exception as e:
     print(f"Error while running `{cmd}'")
