@@ -9,7 +9,9 @@ if globals().get("snakemake") is None:
 if len(snakemake.params.keys()) > 0:
     raise Exception("Keyword arguments are not allowed with this wrapper")
 
+print(snakemake.params)
 script = snakemake.params.pop(0)
+print(snakemake.params)
 if not os.path.exists(script):
     raise Exception("The first parameter is not a valid path to a script file")
 
@@ -31,7 +33,6 @@ else:
     cmd = f"python {script} {args}"
 
 try:
-    print(cmd)
     shell(cmd)
 except Exception as e:
     print(f"Error while running `{cmd}'")
