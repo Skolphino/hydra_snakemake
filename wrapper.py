@@ -9,15 +9,14 @@ if globals().get("snakemake") is None:
 if len(snakemake.params.keys()) > 0:
     raise Exception("Keyword arguments are not allowed with this wrapper")
 
-print(snakemake.params)
-script = snakemake.params.pop(0)
-print(snakemake.params)
+params = list(snakemake.params)
+script = params.pop(0)
 if not os.path.exists(script):
     raise Exception("The first parameter is not a valid path to a script file")
 
 params_context = snakemake.__dict__.copy()
 args = []
-for option in snakemake.params:
+for option in params:
     if type(option) is not str:
         raise Exception(f"option {option} is not a string")
 
